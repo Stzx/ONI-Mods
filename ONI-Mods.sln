@@ -1,0 +1,71 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-WiTricity", "src\ONI-WiTricity\ONI-WiTricity.csproj", "{47269523-798F-44A9-BD4E-2A95B7B61F62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-EquipmentExtension", "src\ONI-EquipmentExtension\ONI-EquipmentExtension.csproj", "{AE1ADFC5-F87A-43A4-8229-FD0186A74E36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-FontSelector", "src\ONI-FontSelector\ONI-FontSelector.csproj", "{FF87B1AA-A22D-4005-B7F4-A5FB4794A928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-ExclusiveFullScreen", "src\ONI-ExclusiveFullScreen\ONI-ExclusiveFullScreen.csproj", "{4E10D100-80BC-4C85-AABF-AAE9070BB0E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-PipelineExtension", "src\ONI-PipelineExtension\ONI-PipelineExtension.csproj", "{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-TrendDisplay", "src\ONI-TrendDisplay\ONI-TrendDisplay.csproj", "{FDC88D65-8110-4F40-91B5-A7AFCD0972CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_Working", "0_Working", "{8C3BB270-A22D-4C39-81C0-F37C8168DC51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_Experimental", "4_Experimental", "{A75795BD-5BEA-4D8C-A2A5-B4EF61AD2FE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9_Outdated", "9_Outdated", "{5E4329B5-8DD1-4D5E-A92E-413960A4055D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_Untested", "2_Untested", "{6B569DDC-EFAC-4A9D-9CF0-70A60FCDA297}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47269523-798F-44A9-BD4E-2A95B7B61F62}.Debug|Any CPU.ActiveCfg = Dev|Any CPU
+		{47269523-798F-44A9-BD4E-2A95B7B61F62}.Debug|Any CPU.Build.0 = Dev|Any CPU
+		{47269523-798F-44A9-BD4E-2A95B7B61F62}.Release|Any CPU.ActiveCfg = Local|Any CPU
+		{47269523-798F-44A9-BD4E-2A95B7B61F62}.Release|Any CPU.Build.0 = Local|Any CPU
+		{AE1ADFC5-F87A-43A4-8229-FD0186A74E36}.Debug|Any CPU.ActiveCfg = Dev|Any CPU
+		{AE1ADFC5-F87A-43A4-8229-FD0186A74E36}.Debug|Any CPU.Build.0 = Dev|Any CPU
+		{AE1ADFC5-F87A-43A4-8229-FD0186A74E36}.Release|Any CPU.ActiveCfg = Local|Any CPU
+		{AE1ADFC5-F87A-43A4-8229-FD0186A74E36}.Release|Any CPU.Build.0 = Local|Any CPU
+		{FF87B1AA-A22D-4005-B7F4-A5FB4794A928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF87B1AA-A22D-4005-B7F4-A5FB4794A928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF87B1AA-A22D-4005-B7F4-A5FB4794A928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF87B1AA-A22D-4005-B7F4-A5FB4794A928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E10D100-80BC-4C85-AABF-AAE9070BB0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E10D100-80BC-4C85-AABF-AAE9070BB0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E10D100-80BC-4C85-AABF-AAE9070BB0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E10D100-80BC-4C85-AABF-AAE9070BB0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC88D65-8110-4F40-91B5-A7AFCD0972CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC88D65-8110-4F40-91B5-A7AFCD0972CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC88D65-8110-4F40-91B5-A7AFCD0972CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC88D65-8110-4F40-91B5-A7AFCD0972CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47269523-798F-44A9-BD4E-2A95B7B61F62} = {A75795BD-5BEA-4D8C-A2A5-B4EF61AD2FE0}
+		{AE1ADFC5-F87A-43A4-8229-FD0186A74E36} = {6B569DDC-EFAC-4A9D-9CF0-70A60FCDA297}
+		{FF87B1AA-A22D-4005-B7F4-A5FB4794A928} = {A75795BD-5BEA-4D8C-A2A5-B4EF61AD2FE0}
+		{4E10D100-80BC-4C85-AABF-AAE9070BB0E1} = {5E4329B5-8DD1-4D5E-A92E-413960A4055D}
+		{4C9074F6-9B6C-4BCB-AF4F-F4F17450F9E3} = {A75795BD-5BEA-4D8C-A2A5-B4EF61AD2FE0}
+		{FDC88D65-8110-4F40-91B5-A7AFCD0972CB} = {A75795BD-5BEA-4D8C-A2A5-B4EF61AD2FE0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24620A7C-15B4-4C74-9E5D-59DFF2C53554}
+	EndGlobalSection
+EndGlobal
