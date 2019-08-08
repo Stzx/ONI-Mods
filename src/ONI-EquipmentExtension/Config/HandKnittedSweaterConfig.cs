@@ -45,7 +45,11 @@ namespace ONI_EquipmentExtension.Config
 
         public static string SNAP_ON1                                   = TUNING.EQUIPMENT.VESTS.SNAPON1;
 
-        public static readonly ClothingWearer.ClothingInfo clothingInfo = new ClothingWearer.ClothingInfo(NAME, 12, 1f, -1.25f);
+        /**
+         * Decor: 12
+         * Temperature: 0.03(3cm)
+         */
+        public static readonly ClothingWearer.ClothingInfo clothingInfo = new ClothingWearer.ClothingInfo(NAME, 12, 0.03f, -1.25f);
 
         #endregion
 
