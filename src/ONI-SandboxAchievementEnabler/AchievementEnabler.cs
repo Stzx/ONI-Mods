@@ -27,23 +27,29 @@ using Harmony;
 namespace ONI_SandboxAchievementEnabler
 {
     [HarmonyPatch(typeof(ColonyAchievementTracker), "UnlockPlatformAchievement", new Type[1] { typeof(string) })]
-    internal class SandboxAchievementEnabler_ColonyAchievementTracker_UnlockPlatformAchievement
+    internal class AchievementEnabler_ColonyAchievementTracker_UnlockPlatformAchievement
     {
         private static bool isSandboxEnabled = false;
+
+        private static bool isDebugEnabled = false;
 
         private static void Prefix()
         {
 
 #if DEBUG
-            Debug.Log($"=== SandboxAchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Prefix] ===");
+            Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Prefix] ===");
             Debug.Log($"=== isSandboxEnabled: {isSandboxEnabled}");
             Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== isDebugEnabled: {isDebugEnabled}");
+            Debug.Log($"=== Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
 
             if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
+            if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
 
 #if DEBUG
-            Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
         }
 
@@ -51,15 +57,19 @@ namespace ONI_SandboxAchievementEnabler
         {
 
 #if DEBUG
-            Debug.Log($"=== SandboxAchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Postfix] ===");
+            Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Postfix] ===");
             Debug.Log($"=== isSandboxEnabled: {isSandboxEnabled}");
             Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== isDebugEnabled: {isDebugEnabled}");
+            Debug.Log($"=== Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
 
             if (isSandboxEnabled) SaveGame.Instance.sandboxEnabled = isSandboxEnabled;
+            if (isDebugEnabled) Game.Instance.debugWasUsed = isDebugEnabled;
 
 #if DEBUG
-            Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
         }
     }

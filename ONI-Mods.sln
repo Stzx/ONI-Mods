@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9_Outdated", "9_Outdated", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_Untested", "2_Untested", "{6B569DDC-EFAC-4A9D-9CF0-70A60FCDA297}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-SandboxAchievementEnabler", "src\ONI-SandboxAchievementEnabler\ONI-SandboxAchievementEnabler.csproj", "{1DD12926-B9C5-4A9E-A31F-A2A5044FE046}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONI-AchievementEnabler", "src\ONI-SandboxAchievementEnabler\ONI-AchievementEnabler.csproj", "{1DD12926-B9C5-4A9E-A31F-A2A5044FE046}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
