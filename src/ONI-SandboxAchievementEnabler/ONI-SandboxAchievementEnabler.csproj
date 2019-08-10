@@ -57,6 +57,10 @@
     <None Include="mod.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SteamPreview\SandboxAchievementEnabler.xcf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SteamPreview\preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
