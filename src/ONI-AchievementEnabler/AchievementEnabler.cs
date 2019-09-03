@@ -96,4 +96,20 @@ namespace ONI_SandboxAchievementEnabler
 #endif
         }
     }
+
+    [HarmonyPatch(typeof(RetiredColonyInfoScreen), "OnShow", new Type[1] { typeof(bool) })]
+    internal class AchievementEnabler_RetiredColonyInfoScreen_OnShow
+    {
+        private static void Prefix()
+        {
+
+#if DEBUG
+            Debug.Log($"=== AchievementEnabler RetiredColonyInfoScreen OnShow [Prefix] ===");
+#endif
+            DebugHandler.InstantBuildMode = false;
+            SaveGame.Instance.sandboxEnabled = false;
+            Game.Instance.debugWasUsed = false;
+        }
+    }
+
 }
