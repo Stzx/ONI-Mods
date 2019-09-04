@@ -28,6 +28,8 @@ using Harmony;
 
 using KMod;
 
+using UnityEngine;
+
 namespace ONI_SandboxAchievementEnabler
 {
 
@@ -100,15 +102,24 @@ namespace ONI_SandboxAchievementEnabler
     [HarmonyPatch(typeof(RetiredColonyInfoScreen), "OnShow", new Type[1] { typeof(bool) })]
     internal class AchievementEnabler_RetiredColonyInfoScreen_OnShow
     {
-        private static void Prefix()
+
+        private static void Postfix(GameObject ___disabledPlatformUnlocks)
         {
 
 #if DEBUG
-            Debug.Log($"=== AchievementEnabler RetiredColonyInfoScreen OnShow [Prefix] ===");
+            Debug.Log($"=== AchievementEnabler RetiredColonyInfoScreen OnShow [Postfix] ===");
 #endif
-            DebugHandler.InstantBuildMode = false;
-            SaveGame.Instance.sandboxEnabled = false;
-            Game.Instance.debugWasUsed = false;
+
+            if (___disabledPlatformUnlocks.activeSelf)
+            {
+                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);
+                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("disabled").gameObject.SetActive(false);
+            }
+
+#if DEBUG
+            Debug.Log($"=== [OnShow] [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [OnShow] [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+#endif
         }
     }
 
