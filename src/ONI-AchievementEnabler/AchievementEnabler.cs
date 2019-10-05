@@ -54,6 +54,8 @@ namespace ONI_SandboxAchievementEnabler
     [HarmonyPatch(typeof(ColonyAchievementTracker), "UnlockPlatformAchievement", new Type[1] { typeof(string) })]
     internal class AchievementEnabler_ColonyAchievementTracker_UnlockPlatformAchievement
     {
+        private static bool isInstantBuildMode = false;
+
         private static bool isSandboxEnabled = false;
 
         private static bool isDebugEnabled = false;
@@ -63,18 +65,22 @@ namespace ONI_SandboxAchievementEnabler
 
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Prefix] ===");
-            Debug.Log($"=== isSandboxEnabled: {isSandboxEnabled}");
-            Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
-            Debug.Log($"=== isDebugEnabled: {isDebugEnabled}");
-            Debug.Log($"=== Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+            Debug.Log($"=== [Prefix STATUS] isInstantBuildMode: {InstantBuildMode}");
+            Debug.Log($"=== [Prefix STATUS] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
+            Debug.Log($"=== [Prefix STATUS] isSandboxEnabled: {isSandboxEnabled}");
+            Debug.Log($"=== [Prefix STATUS] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [Prefix STATUS] isDebugEnabled: {isDebugEnabled}");
+            Debug.Log($"=== [Prefix STATUS] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
 
+            if (isInstantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
             if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
             if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
 
 #if DEBUG
-            Debug.Log($"=== [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
-            Debug.Log($"=== [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+            Debug.Log($"=== [Prefix out] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
+            Debug.Log($"=== [Prefix out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [Prefix out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
         }
 
@@ -83,18 +89,22 @@ namespace ONI_SandboxAchievementEnabler
 
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Postfix] ===");
-            Debug.Log($"=== isSandboxEnabled: {isSandboxEnabled}");
-            Debug.Log($"=== SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
-            Debug.Log($"=== isDebugEnabled: {isDebugEnabled}");
-            Debug.Log($"=== Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+            Debug.Log($"=== [Postfix STATUS] isInstantBuildMode: {InstantBuildMode}");
+            Debug.Log($"=== [Postfix STATUS] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
+            Debug.Log($"=== [Postfix STATUS] isSandboxEnabled: {isSandboxEnabled}");
+            Debug.Log($"=== [Postfix STATUS] SaveGame.Instance.sandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [Postfix STATUS] isDebugEnabled: {isDebugEnabled}");
+            Debug.Log($"=== [Postfix STATUS] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
 
+            if (isInstantBuildMode) DebugHandler.InstantBuildMode = isInstantBuildMode;
             if (isSandboxEnabled) SaveGame.Instance.sandboxEnabled = isSandboxEnabled;
             if (isDebugEnabled) Game.Instance.debugWasUsed = isDebugEnabled;
 
 #if DEBUG
-            Debug.Log($"=== [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
-            Debug.Log($"=== [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+            Debug.Log($"=== [Postfix out] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
+            Debug.Log($"=== [Postfix out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [Postfix out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
         }
     }
