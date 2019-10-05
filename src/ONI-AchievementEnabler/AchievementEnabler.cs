@@ -65,7 +65,7 @@ namespace ONI_SandboxAchievementEnabler
 
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Prefix] ===");
-            Debug.Log($"=== [Prefix STATUS] isInstantBuildMode: {InstantBuildMode}");
+            Debug.Log($"=== [Prefix STATUS] isInstantBuildMode: {isInstantBuildMode}");
             Debug.Log($"=== [Prefix STATUS] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
             Debug.Log($"=== [Prefix STATUS] isSandboxEnabled: {isSandboxEnabled}");
             Debug.Log($"=== [Prefix STATUS] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
@@ -89,7 +89,7 @@ namespace ONI_SandboxAchievementEnabler
 
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Postfix] ===");
-            Debug.Log($"=== [Postfix STATUS] isInstantBuildMode: {InstantBuildMode}");
+            Debug.Log($"=== [Postfix STATUS] isInstantBuildMode: {isInstantBuildMode}");
             Debug.Log($"=== [Postfix STATUS] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
             Debug.Log($"=== [Postfix STATUS] isSandboxEnabled: {isSandboxEnabled}");
             Debug.Log($"=== [Postfix STATUS] SaveGame.Instance.sandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
