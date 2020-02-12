@@ -17,7 +17,7 @@ Stzx `Oxygen Not Included` Mods
 
 ### 注意
 
-1. 编译版本为 `LU-372041`
+1. 编译版本为 `RP-394232-D`
 
 ### 许可证
 
