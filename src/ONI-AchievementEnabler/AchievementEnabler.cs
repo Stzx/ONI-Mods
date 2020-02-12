@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Silence Tai
+ * Copyright (c) 2019-2020 Silence Tai
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,17 +28,20 @@ using Harmony;
 
 using KMod;
 
+using ONI_AchievementEnabler.Config;
+
 using UnityEngine;
 
 namespace ONI_SandboxAchievementEnabler
 {
-
+    /// <summary>
+    /// Remove obsolete mod name
+    /// </summary>
     [HarmonyPatch(typeof(Manager), "MatchFootprint", new Type[2] { typeof(List<Label>), typeof(Content) })]
     internal class AchievementEnabler_Manager_MatchFootprint
     {
         private static void Prefix(List<Label> footprint)
         {
-
 #if DEBUG
             Debug.Log($"=== AchievementEnabler Manager MatchFootprint [Prefix] ===");
 
@@ -47,7 +50,11 @@ namespace ONI_SandboxAchievementEnabler
             // Remove old dll
             // Version: 1654370652
 
-            footprint = footprint.Where(item => !item.title.Equals("Sandbox Achievement Enabler")).ToList();
+            try
+            {
+                footprint = footprint.Where(item => !item.title.Equals("Sandbox Achievement Enabler")).ToList();
+            }
+            catch { }
         }
     }
 
@@ -62,7 +69,6 @@ namespace ONI_SandboxAchievementEnabler
 
         private static void Prefix()
         {
-
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Prefix] ===");
             Debug.Log($"=== [Prefix STATUS] isInstantBuildMode: {isInstantBuildMode}");
@@ -72,12 +78,15 @@ namespace ONI_SandboxAchievementEnabler
             Debug.Log($"=== [Prefix STATUS] isDebugEnabled: {isDebugEnabled}");
             Debug.Log($"=== [Prefix STATUS] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
-
-            if (isInstantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
-            if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
-            if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
+            if (Config.Args.isEnable)
+            {
+                if (isInstantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
+                if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
+                if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
+            }
 
 #if DEBUG
+            Debug.Log($"=== [Prefix out] isEnable: {Config.Args.isEnable}");
             Debug.Log($"=== [Prefix out] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
             Debug.Log($"=== [Prefix out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
             Debug.Log($"=== [Prefix out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
@@ -86,7 +95,6 @@ namespace ONI_SandboxAchievementEnabler
 
         private static void Postfix()
         {
-
 #if DEBUG
             Debug.Log($"=== AchievementEnabler ColonyAchievementTracker UnlockPlatformAchievement [Postfix] ===");
             Debug.Log($"=== [Postfix STATUS] isInstantBuildMode: {isInstantBuildMode}");
@@ -102,6 +110,7 @@ namespace ONI_SandboxAchievementEnabler
             if (isDebugEnabled) Game.Instance.debugWasUsed = isDebugEnabled;
 
 #if DEBUG
+            Debug.Log($"=== [Postfix out] isEnable: {Config.Args.isEnable}");
             Debug.Log($"=== [Postfix out] DebugHandler.InstantBuildMode: {DebugHandler.InstantBuildMode}");
             Debug.Log($"=== [Postfix out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
             Debug.Log($"=== [Postfix out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
@@ -112,25 +121,25 @@ namespace ONI_SandboxAchievementEnabler
     [HarmonyPatch(typeof(RetiredColonyInfoScreen), "OnShow", new Type[1] { typeof(bool) })]
     internal class AchievementEnabler_RetiredColonyInfoScreen_OnShow
     {
-
         private static void Postfix(GameObject ___disabledPlatformUnlocks)
         {
-
 #if DEBUG
             Debug.Log($"=== AchievementEnabler RetiredColonyInfoScreen OnShow [Postfix] ===");
 #endif
-
-            if (___disabledPlatformUnlocks.activeSelf)
+            if (Config.Args.isEnable)
             {
-                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);
-                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("disabled").gameObject.SetActive(false);
+                if (___disabledPlatformUnlocks.activeSelf)
+                {
+                    ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);
+                    ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("disabled").gameObject.SetActive(false);
+                }
             }
 
 #if DEBUG
-            Debug.Log($"=== [OnShow] [out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
-            Debug.Log($"=== [OnShow] [out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
+            Debug.Log($"=== [OnShow out] isEnable: {Config.Args.isEnable}");
+            Debug.Log($"=== [OnShow out] SaveGame.SandboxEnabled: {SaveGame.Instance.sandboxEnabled}");
+            Debug.Log($"=== [OnShow out] Game.debugWasUsed: {Game.Instance.debugWasUsed}");
 #endif
         }
     }
-
 }
