@@ -28,66 +28,60 @@ using Harmony;
 
 using Newtonsoft.Json;
 
-namespace ONI_AchievementEnabler.Config
+namespace ONI_AchievementEnabler.Model
 {
     internal static class Config
     {
         internal class ModArgs
         {
             [JsonProperty]
-            public string ver;
+            public string ver = "1.1";
 
             [JsonProperty]
-            public bool isEnable;
-
-            public override string ToString()
-            {
-                return $"ver: {ver} > isEnable: {isEnable}";
-            }
+            public bool isEnable = true;
         }
 
         private static readonly string _modDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
         private const string _fileName = "Config.json";
 
-        private static readonly string _fullPath = $"{_modDir}\\{_fileName}";
+        private static readonly string _fullPath = $"{_modDir}{Path.DirectorySeparatorChar}{_fileName}";
 
-        private static readonly FileSystemWatcher _configWatcher = new FileSystemWatcher();
+        private static readonly FileSystemWatcher _watcher = new FileSystemWatcher();
 
-        public static ModArgs Args = new ModArgs()
-        {
-            ver = "1.0",
-            isEnable = true
-        };
+        public static bool isInit = false;
 
-        static Config()
-        {
-            _configWatcher.Path = _modDir;
-            _configWatcher.Filter = _fileName;
-
-            _configWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            _configWatcher.Changed += OnChanged;
-
-            _configWatcher.EnableRaisingEvents = true;
-        }
+        public static ModArgs Args = new ModArgs();
 
         internal static void Init()
         {
-            if (File.Exists(_fullPath))
-                Read();
-            else
-                Writer();
+            Debug.Log("[Achievement Enabler] Initializing...");
+
+            if (File.Exists(_fullPath)) { Read(); } else { Writer(); }
+
+            _watcher.Path = _modDir;
+            _watcher.Filter = _fileName;
+
+            _watcher.NotifyFilter = NotifyFilters.LastWrite;
+            _watcher.Changed += OnChanged;
+
+            _watcher.EnableRaisingEvents = true;
+
+            isInit = true;
         }
 
         private static void Read()
         {
             try
             {
-                Args = JsonConvert.DeserializeObject<ModArgs>(File.ReadAllText(_fullPath));
+                var config = File.ReadAllText(_fullPath);
+                Args = JsonConvert.DeserializeObject<ModArgs>(config);
+
+                Debug.Log($"[Achievement Enabler] Configuration file loaded successfully. ({config})");
             }
-            catch
+            catch (Exception e)
             {
-                Debug.LogWarning($"=== [Achievement Enabler] => Configuration file read failed. ===");
+                Debug.LogWarning($"[Achievement Enabler] Configuration file parsing failed. (Default configuration will be used)\t({e.Message})");
             }
         }
 
@@ -95,26 +89,27 @@ namespace ONI_AchievementEnabler.Config
         {
             try
             {
-                var jsonBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Args));
+                var config = JsonConvert.SerializeObject(Args);
+                var jsonBytes = Encoding.UTF8.GetBytes(config);
 
                 using (var configFile = File.Create(_fullPath))
                 {
                     configFile.Write(jsonBytes, 0, jsonBytes.Length);
                 }
+
+                Debug.Log($"[Achievement Enabler] Configuration file saved successfully. ({config})");
             }
-            catch
+            catch (Exception e)
             {
-                Debug.LogWarning($"=== [Achievement Enabler] => Configuration file write failed. ===");
+                Debug.LogWarning($"[Achievement Enabler] Unable to save configuration. ({e.Message})");
             }
         }
 
-        public static void OnChanged(object source, FileSystemEventArgs e)
+        private static void OnChanged(object source, FileSystemEventArgs e)
         {
 #if DEBUG
-            Debug.Log($"=== [Achievement Enabler] => Args: {Args.ToString()} ===");
-            Debug.Log($"=== [Achievement Enabler] => OnChanged ===");
+            Debug.Log("[Achievement Enabler] Trigger configuration reload.");
 #endif
-
             if (File.Exists(_fullPath))
             {
                 Read();
@@ -123,11 +118,14 @@ namespace ONI_AchievementEnabler.Config
     }
 
     [HarmonyPatch(typeof(Game), "OnPrefabInit", new Type[0] { })]
-    internal class AchievementEnabler_Game_OnPrefabInit
+    public class AchievementEnabler_Game_OnPrefabInit
     {
-        private static void Prefix()
+        public static void Prefix()
         {
-            Config.Init();
+            if (!Config.isInit)
+            {
+                Config.Init();
+            }
         }
     }
 }
