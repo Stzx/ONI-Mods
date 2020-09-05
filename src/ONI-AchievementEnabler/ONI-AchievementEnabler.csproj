@@ -78,7 +78,7 @@
     <None Include="mod.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="SteamPreview\AchievementEnabler.xcf" />
+    <None Include="SteamPreview\AchievementEnabler.psd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SteamPreview\preview.png" />
