@@ -39,7 +39,7 @@ namespace ONI_AchievementEnabler.Patch
         public static void Prefix()
         {
 #if DEBUG
-            Debug.Log($"[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
+            Debug.Log("[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
             LogState();
 #endif
 
@@ -51,7 +51,7 @@ namespace ONI_AchievementEnabler.Patch
             }
 
 #if DEBUG
-            Debug.Log($"[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
+            Debug.Log("[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
             LogState();
 #endif
         }
@@ -59,7 +59,7 @@ namespace ONI_AchievementEnabler.Patch
         public static void Postfix()
         {
 #if DEBUG
-            Debug.Log($"[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
+            Debug.Log("[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
             LogState();
 #endif
 
@@ -71,7 +71,7 @@ namespace ONI_AchievementEnabler.Patch
             }
 
 #if DEBUG
-            Debug.Log($"[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
+            Debug.Log("[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
             LogState();
 #endif
         }
