@@ -39,6 +39,10 @@ namespace ONI_AchievementEnabler.Model
 
             [JsonProperty]
             public bool isEnable = true;
+
+#if EXPERIMENTAL
+            public bool overwriteArchiveSandbox = true;
+#endif
         }
 
         private static readonly string _modDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
