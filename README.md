@@ -11,7 +11,7 @@ Stzx `Oxygen Not Included` Mods
 
 ### NOTE
 
-1. Compiled of `RP-394232-D`
+1. Compiled of `CS-444111`
 
 ### License
 
