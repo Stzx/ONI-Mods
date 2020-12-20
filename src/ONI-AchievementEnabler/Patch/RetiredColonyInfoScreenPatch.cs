@@ -20,10 +20,12 @@
  * SOFTWARE.
  */
 
+using Harmony;
+
+using ONI_AchievementEnabler.Model;
+
 using System;
 
-using Harmony;
-using ONI_AchievementEnabler.Model; 
 using UnityEngine;
 
 namespace ONI_AchievementEnabler.Patch
@@ -33,10 +35,6 @@ namespace ONI_AchievementEnabler.Patch
     {
         public static void Postfix(GameObject ___disabledPlatformUnlocks)
         {
-#if DEBUG
-            Debug.Log("[Achievement Enabler] [Postfix] (RetiredColonyInfoScreen > OnShow)");
-#endif
-
             if (Config.Args.isEnable && SaveGame.Instance != null)
             {
                 ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);

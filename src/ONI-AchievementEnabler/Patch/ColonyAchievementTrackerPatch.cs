@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-using System;
-
 using Harmony;
+
 using ONI_AchievementEnabler.Model;
+
+using System;
 
 namespace ONI_AchievementEnabler.Patch
 {
@@ -38,54 +39,22 @@ namespace ONI_AchievementEnabler.Patch
 
         public static void Prefix()
         {
-#if DEBUG
-            Debug.Log("[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
-            LogState();
-#endif
-
             if (Config.Args.isEnable)
             {
                 if (isInstantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
                 if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
                 if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
             }
-
-#if DEBUG
-            Debug.Log("[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
-            LogState();
-#endif
         }
 
         public static void Postfix()
         {
-#if DEBUG
-            Debug.Log("[Achievement Enabler] [Prefix] [In] (ColonyAchievementTracker > UnlockPlatformAchievement)");
-            LogState();
-#endif
-
             if (Config.Args.isEnable)
             {
-                if (isInstantBuildMode) DebugHandler.InstantBuildMode = isInstantBuildMode;
-                if (isSandboxEnabled) SaveGame.Instance.sandboxEnabled = isSandboxEnabled;
-                if (isDebugEnabled) Game.Instance.debugWasUsed = isDebugEnabled;
+                if (isInstantBuildMode) DebugHandler.InstantBuildMode = true;
+                if (isSandboxEnabled) SaveGame.Instance.sandboxEnabled = true;
+                if (isDebugEnabled) Game.Instance.debugWasUsed = true;
             }
-
-#if DEBUG
-            Debug.Log("[Achievement Enabler] [Prefix] [Out] (ColonyAchievementTracker > UnlockPlatformAchievement)");
-            LogState();
-#endif
         }
-
-#if DEBUG
-        private static void LogState()
-        {
-            Debug.Log($"[Achievement Enabler] (isInstantBuildMode > {isInstantBuildMode})");
-            Debug.Log($"[Achievement Enabler] (DebugHandler.InstantBuildMode : {DebugHandler.InstantBuildMode})");
-            Debug.Log($"[Achievement Enabler] (isSandboxEnabled > {isSandboxEnabled})");
-            Debug.Log($"[Achievement Enabler] (SaveGame.Instance.sandboxEnabled > {SaveGame.Instance.sandboxEnabled})");
-            Debug.Log($"[Achievement Enabler] (isDebugEnabled > {isDebugEnabled})");
-            Debug.Log($"[Achievement Enabler] (Game.debugWasUsed > {Game.Instance.debugWasUsed})");
-        }
-#endif
     }
 }

@@ -20,13 +20,13 @@
  * SOFTWARE.
  */
 
-using System;
-using System.IO;
-using System.Text;
-
 using Harmony;
 
 using Newtonsoft.Json;
+
+using System;
+using System.IO;
+using System.Text;
 
 namespace ONI_AchievementEnabler.Model
 {
@@ -77,11 +77,11 @@ namespace ONI_AchievementEnabler.Model
                 var config = File.ReadAllText(_fullPath);
                 Args = JsonConvert.DeserializeObject<ModArgs>(config);
 
-                Debug.Log($"[Achievement Enabler] Configuration file loaded successfully. ({config})");
+                Debug.LogFormat("[Achievement Enabler Configuration file loaded successfully. ({0})", new[] { config });
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"[Achievement Enabler] Configuration file parsing failed. (Default configuration will be used)\t({e.Message})");
+                Debug.LogWarningFormat("[Achievement Enabler Configuration file parsing failed. (Default configuration will be used)\t({0})", new[] { e.Message });
             }
         }
 
@@ -97,19 +97,18 @@ namespace ONI_AchievementEnabler.Model
                     configFile.Write(jsonBytes, 0, jsonBytes.Length);
                 }
 
-                Debug.Log($"[Achievement Enabler] Configuration file saved successfully. ({config})");
+                Debug.LogFormat("[Achievement Enabler Configuration file saved successfully. ({0})", new[] { config });
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"[Achievement Enabler] Unable to save configuration. ({e.Message})");
+                Debug.LogWarningFormat("[Achievement Enabler Unable to save configuration. ({0})", new[] { e.Message });
             }
         }
 
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
-#if DEBUG
-            Debug.Log("[Achievement Enabler] Trigger configuration reload.");
-#endif
+            Debug.LogFormat("[Achievement Enabler Trigger configuration reload.");
+
             if (File.Exists(_fullPath))
             {
                 Read();
