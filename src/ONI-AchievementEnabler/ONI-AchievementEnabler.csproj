@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -86,16 +86,16 @@
     <None Include="mod.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="mod_info.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SteamPreview\AchievementEnabler.psd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SteamPreview\preview.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="archived_versions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>del "%25ONI_MODS_PATH%25\mods.json" /F /S /Q &amp; rd "%25ONI_MODS_PATH%25\Dev\$(ProjectName)" /S /Q &amp; rd "%25ONI_MODS_PATH%25\Local\$(ProjectName)" /S /Q</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir.TrimEnd('\'))" "%25ONI_MODS_PATH%25\$(ConfigurationName)\$(ProjectName)" /Y /S /E /I &amp;&amp; start "" steam://rungameid/457140</PostBuildEvent>
-  </PropertyGroup>
 </Project>
