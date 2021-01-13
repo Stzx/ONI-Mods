@@ -1,8 +1,8 @@
 @echo off
 
-set PATH=%ONI_PATH%\OxygenNotIncluded_Data\Managed
+set ONI_DATA_PATH=%ONI_PATH%\OxygenNotIncluded_Data\Managed
 
-xcopy "%PATH%\Unity*.dll" %~dp0 /Y
-xcopy "%PATH%\Assembly-CSharp*.dll" %~dp0 /Y
-xcopy "%PATH%\0Harmony.dll" %~dp0 /Y
-xcopy "%PATH%\Newtonsoft.Json.dll" %~dp0 /Y
+%SystemRoot%\System32\xcopy "%ONI_DATA_PATH%\Unity*.dll" %~dp0 /Y
+%SystemRoot%\System32\xcopy "%ONI_DATA_PATH%\Assembly-CSharp*.dll" %~dp0 /Y
+%SystemRoot%\System32\xcopy "%ONI_DATA_PATH%\0Harmony.dll" %~dp0 /Y
+%SystemRoot%\System32\xcopy "%ONI_DATA_PATH%\Newtonsoft.Json.dll" %~dp0 /Y
