@@ -12,12 +12,12 @@ Stzx `Oxygen Not Included` Mods
 0. 需要 `Visual Studio 2019` 或更高的版本，并安装 `.NET Framework 4.0 Developer Pack`
 1. 设置环境变量指向游戏相关目录
     * `ONI_PATH`（ 指向游戏安装目录 / `<steamapps>\common\OxygenNotIncluded` ）
-    * `ONI_MODS_PATH`（ 指向游戏 Mod 目录 / `C:\Users\<user>\Documents\Klei\OxygenNotIncluded\mods` ）
+    * <del>`ONI_MODS_PATH`（ 指向游戏 Mod 目录 / `C:\Users\<user>\Documents\Klei\OxygenNotIncluded\mods` ）<del>
 2. 更新 libs，执行 `_updateLibs.bat`，如果普通权限执行没有成功，请重新使用管理员权限尝试
 
 ### 注意
 
-1. `Achievement Enabler` 编译版本为 `CS-447213`
+1. `Achievement Enabler` 编译版本为 `CS-447596`
 
 ### 许可证
 
