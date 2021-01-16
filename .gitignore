@@ -331,3 +331,5 @@ ASALocalRun/
 
 # Oxygen not included libs dll
 libs/*.dll
+
+!/**/archived_versions/**/*.dll
