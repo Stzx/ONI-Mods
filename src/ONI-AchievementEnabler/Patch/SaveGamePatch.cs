@@ -19,16 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-using Harmony;
-
-using ONI_AchievementEnabler.Model;
-
-using System;
 
 namespace ONI_AchievementEnabler.Patch
 {
 
 #if EXPERIMENTAL
+
+    using HarmonyLib;
+
+    using ONI_AchievementEnabler.Model;
+
+    using System;
+
     [HarmonyPatch(typeof(SaveGame), "GetSaveHeader", new[] { typeof(bool), typeof(bool), typeof(SaveGame.Header) }, new[] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out })]
     public class SaveGamePatch_SaveGame_GetSaveHeader
     {

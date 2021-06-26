@@ -20,8 +20,6 @@
  * SOFTWARE.
  */
 
-using Harmony;
-
 using Newtonsoft.Json;
 
 using System;
@@ -116,18 +114,6 @@ namespace ONI_AchievementEnabler.Model
             if (File.Exists(_fullPath))
             {
                 Read();
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Game), "OnPrefabInit", new Type[0] { })]
-    public class AchievementEnabler_Game_OnPrefabInit
-    {
-        public static void Prefix()
-        {
-            if (!Config.isInit)
-            {
-                Config.Init();
             }
         }
     }

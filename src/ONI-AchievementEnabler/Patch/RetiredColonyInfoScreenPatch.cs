@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-using Harmony;
+using HarmonyLib;
 
 using ONI_AchievementEnabler.Model;
 

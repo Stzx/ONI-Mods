@@ -1,2 +1,3 @@
-title: Achievement Enabler Dev
-description: Enable Steam achievements in sandbox and debug mode.
+title: "Achievement Enabler"
+description: "Unlock Steam achievements in Debug or Sandbox or Debug + Sandbox mode."
+staticID: "ONIAchievementEnabler"
