@@ -1,8 +1,6 @@
 # ONI Mods
 Stzx `Oxygen Not Included` Mods
 
-[中文说明](https://github.com/Stzx/ONI-Mods/blob/master/docs/README.zh_CN.md)
-
 ### Mod list
 
 | Name | Desc |
@@ -11,7 +9,7 @@ Stzx `Oxygen Not Included` Mods
 
 ### NOTE
 
-1. `Achievement Enabler` Compiled of `CS-447596`
+1. `Achievement Enabler` Compiled of `CS-469369`
 
 ### License
 
