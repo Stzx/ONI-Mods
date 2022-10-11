@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2019-2021 Silence Tai
+* Copyright (c) 2019-2022 Silence Tai
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -20,22 +20,53 @@
 * SOFTWARE.
 */
 
+using AchievementEnablerLib.Model;
+
 using HarmonyLib;
 
-using ONI_AchievementEnabler.Model;
+using Newtonsoft.Json;
 
-namespace ONI_AchievementEnabler
+using System;
+
+namespace AchievementEnablerLib
 {
     public class AchievementEnablerMod : KMod.UserMod2
     {
         public override void OnLoad(Harmony harmony)
         {
-            if (!Config.isInit)
-            {
-                Config.Init();
-            }
+#if TRACE
+            Harmony.DEBUG = true;
+#endif
 
-            harmony.PatchAll();
+#if DEBUG
+            Debug.LogFormat("{0}: {1}", new[] { mod.title, JsonConvert.SerializeObject(mod) });
+            Debug.LogFormat("{0} Assembly: {1}", new[] { mod.title, JsonConvert.SerializeObject(assembly) });
+#endif
+            Configure.Load(this);
+
+            base.OnLoad(harmony);
         }
     }
+
+#if DEBUG
+    [HarmonyPatch(typeof(DebugHandler), MethodType.Constructor, new Type[] { })]
+    static class DebugHandlerPatch
+    {
+        static void Postfix()
+        {
+            DebugHandler.SetDebugEnabled(true);
+        }
+    }
+#endif
+
+#if TRACE
+    [HarmonyPatch(typeof(DevToolManager), nameof(DevToolManager.UpdateShouldShowTools))]
+    static class DevToolManagerPatch
+    {
+        static void Prefix(bool ___showImGui)
+        {
+            Debug.Log($"DevToolManager: {___showImGui} - {DebugHandler.enabled}");
+        }
+    }
+#endif
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019-2021 Silence Tai
+ * Copyright (c) 2019-2022 Silence Tai
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,41 +20,42 @@
  * SOFTWARE.
  */
 
-using HarmonyLib;
+using AchievementEnablerLib.Model;
 
-using ONI_AchievementEnabler.Model;
+using HarmonyLib;
 
 using System;
 
-namespace ONI_AchievementEnabler.Patch
+namespace AchievementEnablerLib.Patch
 {
-    [HarmonyPatch(typeof(ColonyAchievementTracker), "UnlockPlatformAchievement", new Type[1] { typeof(string) })]
-    public class AchievementEnabler_ColonyAchievementTracker_UnlockPlatformAchievement
+    [HarmonyPatch(typeof(ColonyAchievementTracker), "UnlockPlatformAchievement", new[] { typeof(string) })]
+    class ColonyAchievementTrackerUnlockPlatformAchievement
     {
-        private static bool isInstantBuildMode = false;
-
-        private static bool isSandboxEnabled = false;
-
-        private static bool isDebugEnabled = false;
-
-        public static void Prefix()
+        private struct State
         {
-            if (Config.Args.isEnable)
-            {
-                if (isInstantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
-                if (isSandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
-                if (isDebugEnabled = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
-            }
+            internal bool instantBuildMode;
+
+            internal bool sandboxEnabled;
+
+            internal bool debugWasUsed;
         }
 
-        public static void Postfix()
+        static void Prefix(ref State __state)
         {
-            if (Config.Args.isEnable)
-            {
-                if (isInstantBuildMode) DebugHandler.InstantBuildMode = true;
-                if (isSandboxEnabled) SaveGame.Instance.sandboxEnabled = true;
-                if (isDebugEnabled) Game.Instance.debugWasUsed = true;
-            }
+            if (Configure.IsDisable) return;
+
+            if (__state.instantBuildMode = DebugHandler.InstantBuildMode) DebugHandler.InstantBuildMode = false;
+            if (__state.sandboxEnabled = SaveGame.Instance.sandboxEnabled) SaveGame.Instance.sandboxEnabled = false;
+            if (__state.debugWasUsed = Game.Instance.debugWasUsed) Game.Instance.debugWasUsed = false;
+        }
+
+        static void Postfix(State __state)
+        {
+            if (Configure.IsDisable) return;
+
+            if (__state.instantBuildMode) DebugHandler.InstantBuildMode = true;
+            if (__state.sandboxEnabled) SaveGame.Instance.sandboxEnabled = true;
+            if (__state.debugWasUsed) Game.Instance.debugWasUsed = true;
         }
     }
 }

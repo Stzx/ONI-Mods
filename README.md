@@ -9,7 +9,7 @@ Stzx `Oxygen Not Included` Mods
 
 ### NOTE
 
-1. `Achievement Enabler` Compiled of `CS-469369`
+1. `Achievement Enabler` Compiled of `CS-526233`
 
 ### License
 

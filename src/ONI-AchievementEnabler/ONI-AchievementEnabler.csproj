@@ -7,7 +7,7 @@
     <ProjectGuid>{1DD12926-B9C5-4A9E-A31F-A2A5044FE046}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ONI_AchievementEnabler</RootNamespace>
+    <RootNamespace>AchievementEnablerLib</RootNamespace>
     <AssemblyName>ONI-AchievementEnabler</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -16,22 +16,23 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;EXPERIMENTAL</DefineConstants>
+    <DefineConstants>DEBUG;EXPERIMENTAL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>0</WarningLevel>
     <NoWarn>IDE0051</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Local|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +61,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\libs\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\libs\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -68,12 +73,20 @@
       <HintPath>..\..\libs\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\libs\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\libs\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AchievementEnablerMod.cs" />
+    <Compile Include="Model\Configure.cs" />
     <Compile Include="Patch\ColonyAchievementTrackerPatch.cs" />
-    <Compile Include="Model\Config.cs" />
-    <Compile Include="Patch\SaveGamePatch.cs" />
+    <Compile Include="Patch\PauseScreenPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patch\RetiredColonyInfoScreenPatch.cs" />
   </ItemGroup>
@@ -102,4 +115,12 @@
     <Content Include="SteamPreview\preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Debug del "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\Dev" /F /S /Q
+if $(ConfigurationName) == Release del "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\Local" /F /S /Q</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug xcopy "$(TargetDir)" "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\Dev\ONI-AchievementEnabler\*" /I /S /Y /E &amp;&amp; start steam://rungameid/457140
+if $(ConfigurationName) == Release xcopy "$(TargetDir)" "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\Local\1830166724\*" /I /S /Y /E &amp;&amp; start steam://rungameid/457140</PostBuildEvent>
+  </PropertyGroup>
 </Project>

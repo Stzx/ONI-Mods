@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019-2021 Silence Tai
+ * Copyright (c) 2019-2022 Silence Tai
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-using HarmonyLib;
+using AchievementEnablerLib.Model;
 
-using ONI_AchievementEnabler.Model;
+using HarmonyLib;
 
 using System;
 
 using UnityEngine;
 
-namespace ONI_AchievementEnabler.Patch
+namespace AchievementEnablerLib.Patch
 {
-    [HarmonyPatch(typeof(RetiredColonyInfoScreen), "OnShow", new Type[1] { typeof(bool) })]
-    public class AchievementEnabler_RetiredColonyInfoScreen_OnShow
+    [HarmonyPatch(typeof(RetiredColonyInfoScreen), "OnShow", new[] { typeof(bool) })]
+    class RetiredColonyInfoScreenOnShow
     {
-        public static void Postfix(GameObject ___disabledPlatformUnlocks)
+        static void Postfix(GameObject ___disabledPlatformUnlocks)
         {
-            if (Config.Args.isEnable && SaveGame.Instance != null)
-            {
-                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);
-                ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("disabled").gameObject.SetActive(false);
-            }
+            if (Configure.IsDisable) return;
+
+            ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("enabled").gameObject.SetActive(true);
+            ___disabledPlatformUnlocks.GetComponent<HierarchyReferences>().GetReference("disabled").gameObject.SetActive(false);
         }
     }
 }
